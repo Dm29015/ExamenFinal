@@ -49,10 +49,8 @@ Future<void> actualizarPeaje(int id, Map peaje) async {
       },
       body: jsonEncode(peaje),
     );
-    if (response.statusCode != 200 || response.statusCode != 201) {
-      (peaje);
+    if (response.statusCode != 200 && response.statusCode != 201) {
       throw Exception('Error en la solicitud HTTP: ${response.statusCode}');
-      
     }
   } catch (e) {
     throw Exception('Error en la carga de la API: $e');
@@ -65,7 +63,8 @@ Future<List<String>> fetchNombresPeajes() async {
     final response = await http.get(Uri.parse(apiExterna));
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(response.body);
-      List<String> nombresPeajes = jsonResponse.map<String>((peaje) => peaje['peaje']).toList();
+      List<String> nombresPeajes =
+          jsonResponse.map<String>((peaje) => peaje['peaje']).toList();
       return nombresPeajes;
     } else {
       throw Exception('Error en la solicitud HTTP: ${response.statusCode}');
@@ -76,17 +75,17 @@ Future<List<String>> fetchNombresPeajes() async {
 }
 
 // GET: Obtener valor del peaje basado en el nombre y la categoría
-Future<String> fetchValorPeaje(String nombrePeaje, String categoriaTarifa) async {
+Future<String> fetchValorPeaje(
+    String nombrePeaje, String categoriaTarifa) async {
   try {
     final response = await http.get(Uri.parse(apiExterna));
     if (response.statusCode == 200) {
       List jsonResponse = json.decode(response.body);
       var peaje = jsonResponse.firstWhere(
-        (peaje) =>
-          peaje['peaje'] == nombrePeaje &&
-          peaje['idcategoriatarifa'] == categoriaTarifa,
-        orElse: () => null
-      );
+          (peaje) =>
+              peaje['peaje'] == nombrePeaje &&
+              peaje['idcategoriatarifa'] == categoriaTarifa,
+          orElse: () => null);
       if (peaje != null) {
         return peaje['valor'].toString();
       } else {
@@ -100,13 +99,12 @@ Future<String> fetchValorPeaje(String nombrePeaje, String categoriaTarifa) async
   }
 }
 
-
 // DELETE: Eliminar registro de peaje
 Future<void> eliminarPeaje(int peajeId) async {
-  final url = Uri.parse('http://localhost:5146/api/peaje/$peajeId'); // Cambia la URL según tu API
+  final url = Uri.parse('$api/$peajeId'); // Usar la constante api
   try {
     final response = await http.delete(url);
-    if (response.statusCode != 200 || response.statusCode != 201) {
+    if (response.statusCode != 200 && response.statusCode != 201) {
       throw Exception('Error al eliminar peaje: ${response.statusCode}');
     }
   } catch (e) {

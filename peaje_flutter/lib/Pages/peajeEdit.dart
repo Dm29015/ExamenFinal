@@ -40,18 +40,13 @@ class _EditarPeajeState extends State<EditarPeaje> {
     _valorController.text = widget.peaje.valor.toString();
   }
 
-    void _fetchNombresPeajes() async {
+  void _fetchNombresPeajes() async {
     try {
-      // Llamar a la función para obtener los nombres de peajes
-      List<String> nombresPeajes =
-          await fetchNombresPeajes(); // Esta función debe devolver List<String>
-
-      // Actualizar el estado con los nombres de peajes obtenidos
+      List<String> nombresPeajes = await fetchNombresPeajes();
       setState(() {
         _nombresPeajes = nombresPeajes;
       });
     } catch (e) {
-      // Mostrar un mensaje de error en caso de falla al cargar los nombres de peajes
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al cargar nombres de peajes: $e')),
       );
@@ -59,7 +54,6 @@ class _EditarPeajeState extends State<EditarPeaje> {
   }
 
   void _fetchValorPeaje() async {
-    // if (_selectedNombrePeaje != null && _selectedCategoriaTarifa != null) {
     try {
       String valor = await fetchValorPeaje(
           _selectedNombrePeaje!, _selectedCategoriaTarifa!);
@@ -70,7 +64,6 @@ class _EditarPeajeState extends State<EditarPeaje> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al cargar el valor del peaje: $e')),
       );
-      // }
     }
   }
 
@@ -85,8 +78,15 @@ class _EditarPeajeState extends State<EditarPeaje> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(26, 46, 79, 1),
       appBar: AppBar(
-        title: const Text('Editar Peaje'),
+        backgroundColor: const Color.fromRGBO(26, 46, 79, 1),
+        title: const Text(
+          'Editar registro de peaje',
+          style: TextStyle(
+            color: Color.fromARGB(255, 206, 215, 250),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -96,7 +96,11 @@ class _EditarPeajeState extends State<EditarPeaje> {
             children: [
               TextFormField(
                 controller: _placaController,
-                decoration: const InputDecoration(labelText: 'Placa'),
+                decoration: const InputDecoration(
+                  labelText: 'Placa',
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 206, 215, 250)),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor ingresa la placa';
@@ -107,18 +111,20 @@ class _EditarPeajeState extends State<EditarPeaje> {
                   return null;
                 },
               ),
-             DropdownButtonFormField<String>(
-                decoration:
-                    const InputDecoration(labelText: 'Nombre del Peaje'),
+              DropdownButtonFormField<String>(
+                decoration: const InputDecoration(
+                  labelText: 'Nombre del Peaje',
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 206, 215, 250)),
+                ),
                 value: _selectedNombrePeaje,
                 onChanged: (value) {
                   setState(() {
                     _selectedNombrePeaje = value;
-                    _fetchValorPeaje(); // Llamada a la función para obtener más datos relacionados con el peaje seleccionado
+                    _fetchValorPeaje();
                   });
                 },
                 items: _nombresPeajes.toSet().toList().map((nombre) {
-                  // Convertir a Set y luego a List para asegurar valores únicos
                   return DropdownMenuItem(
                     value: nombre,
                     child: Text(nombre),
@@ -132,8 +138,11 @@ class _EditarPeajeState extends State<EditarPeaje> {
                 },
               ),
               DropdownButtonFormField<String>(
-                decoration:
-                    const InputDecoration(labelText: 'Categoría de Tarifa'),
+                decoration: const InputDecoration(
+                  labelText: 'Categoría de Tarifa',
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 206, 215, 250)),
+                ),
                 value: _selectedCategoriaTarifa,
                 onChanged: (value) {
                   setState(() {
@@ -159,10 +168,12 @@ class _EditarPeajeState extends State<EditarPeaje> {
               ),
               TextFormField(
                 controller: _fechaRegistroController,
-                decoration:
-                    const InputDecoration(labelText: 'Fecha de Registro'),
+                decoration: const InputDecoration(
+                  labelText: 'Fecha de Registro',
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 206, 215, 250)),
+                ),
                 onTap: () async {
-                  // Mostrar el datepicker al hacer tap en el campo de texto
                   final DateTime? pickedDate = await showDatePicker(
                     context: context,
                     initialDate: DateTime.now(),
@@ -182,15 +193,17 @@ class _EditarPeajeState extends State<EditarPeaje> {
                   if (value == null || value.isEmpty) {
                     return 'Por favor ingresa la fecha de registro';
                   }
-                  // Validar formato de fecha si es necesario
                   return null;
                 },
               ),
               TextFormField(
                 controller: _valorController,
-                readOnly:
-                    true, // Si es solo para mostrar, de lo contrario quita esta línea
-                decoration: const InputDecoration(labelText: 'Valor'),
+                readOnly: true,
+                decoration: const InputDecoration(
+                  labelText: 'Valor',
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 206, 215, 250)),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'El valor es obligatorio';
@@ -212,8 +225,7 @@ class _EditarPeajeState extends State<EditarPeaje> {
                       "nombrePeaje": _selectedNombrePeaje!,
                       "idCategoriaTarifa": _selectedCategoriaTarifa!,
                       "fechaRegistro": _fechaRegistroController.text,
-                      "valor": double.parse(
-                          _valorController.text)
+                      "valor": double.parse(_valorController.text)
                     };
 
                     try {
@@ -226,8 +238,7 @@ class _EditarPeajeState extends State<EditarPeaje> {
                           backgroundColor: Colors.green,
                         ),
                       );
-                      Navigator.of(context)
-                          .pop(true); // Indicar éxito al volver
+                      Navigator.of(context).pop(true);
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -241,11 +252,57 @@ class _EditarPeajeState extends State<EditarPeaje> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 128, 39, 187)),
+                  backgroundColor: const Color.fromARGB(255, 206, 215, 250),
+                ),
                 child: const Text(
                   'Editar',
-                  style: TextStyle(color: Color.fromARGB(255, 219, 225, 231)),
+                  style: TextStyle(color: Color.fromRGBO(26, 46, 79, 1)),
                 ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: const BottomAppBar(
+        color: Color.fromRGBO(26, 46, 79, 1),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 4.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.person,
+                      color: Color.fromARGB(255, 206, 215, 250), size: 16),
+                  SizedBox(width: 8.0),
+                  Text(
+                    'Deisy Correa',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 206, 215, 250),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.phone,
+                      color: Color.fromARGB(255, 206, 215, 250), size: 16),
+                  SizedBox(width: 8.0),
+                  Text(
+                    '3222500587',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 206, 215, 250),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

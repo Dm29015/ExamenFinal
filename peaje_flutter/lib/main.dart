@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:peaje_flutter/Pages/peajeView.dart';
+import 'package:peaje_flutter/Pages/menu.dart';
 
 void main() {
   runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+    const MainApp({super.key});
+
 
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: PeajePage()
+      debugShowCheckedModeBanner: false,
+      home: MainMenu()
     );
   }
 }

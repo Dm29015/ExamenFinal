@@ -34,7 +34,7 @@ class CardWidget extends StatelessWidget {
               color: colorIcon,
               borderRadius: BorderRadius.circular(15.0),
             ),
-            child: const Icon(Icons.airport_shuttle_rounded, color: Color.fromARGB(255, 42, 54, 68)),
+            child: const Icon(Icons.airport_shuttle_rounded, color: Color.fromRGBO(26, 46, 79, 1)),
           ),
           const SizedBox(width: 20.0),
           Expanded(

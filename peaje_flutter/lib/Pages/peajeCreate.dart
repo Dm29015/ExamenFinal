@@ -73,8 +73,15 @@ class _RegistrarPeajeState extends State<RegistrarPeaje> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(26, 46, 79, 1),
       appBar: AppBar(
-        title: const Text('Registrar Peaje'),
+        backgroundColor: const Color.fromRGBO(26, 46, 79, 1),
+        title: const Text(
+          'Registrar peaje',
+          style: TextStyle(
+            color: Color.fromARGB(255, 206, 215, 250),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -84,7 +91,11 @@ class _RegistrarPeajeState extends State<RegistrarPeaje> {
             children: [
               TextFormField(
                 controller: _placaController,
-                decoration: const InputDecoration(labelText: 'Placa'),
+                decoration: const InputDecoration(
+                  labelText: 'Placa',
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 206, 215, 250)),
+                ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor ingresa la placa';
@@ -96,8 +107,11 @@ class _RegistrarPeajeState extends State<RegistrarPeaje> {
                 },
               ),
               DropdownButtonFormField<String>(
-                decoration:
-                    const InputDecoration(labelText: 'Nombre del Peaje'),
+                decoration: const InputDecoration(
+                  labelText: 'Nombre del Peaje',
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 206, 215, 250)),
+                ),
                 value: _selectedNombrePeaje,
                 onChanged: (value) {
                   setState(() {
@@ -120,8 +134,11 @@ class _RegistrarPeajeState extends State<RegistrarPeaje> {
                 },
               ),
               DropdownButtonFormField<String>(
-                decoration:
-                    const InputDecoration(labelText: 'ID Categoría Tarifa'),
+                decoration: const InputDecoration(
+                  labelText: 'ID Categoría Tarifa',
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 206, 215, 250)),
+                ),
                 value: _selectedCategoriaTarifa,
                 onChanged: (value) {
                   setState(() {
@@ -144,8 +161,11 @@ class _RegistrarPeajeState extends State<RegistrarPeaje> {
               ),
               TextFormField(
                 controller: _fechaRegistroController,
-                decoration:
-                    const InputDecoration(labelText: 'Fecha de Registro'),
+                decoration: const InputDecoration(
+                  labelText: 'Fecha de Registro',
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 206, 215, 250)),
+                ),
                 onTap: () async {
                   // Mostrar el datepicker al hacer tap en el campo de texto
                   final DateTime? pickedDate = await showDatePicker(
@@ -173,7 +193,11 @@ class _RegistrarPeajeState extends State<RegistrarPeaje> {
               ),
               TextFormField(
                 controller: _valorController,
-                decoration: const InputDecoration(labelText: 'Valor'),
+                decoration: const InputDecoration(
+                  labelText: 'Valor',
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(255, 206, 215, 250)),
+                ),
                 readOnly: true,
               ),
               const SizedBox(height: 20),
@@ -202,13 +226,58 @@ class _RegistrarPeajeState extends State<RegistrarPeaje> {
                     }
                   }
                 },
-
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(255, 213, 79, 1)),
+                  backgroundColor: const Color.fromARGB(255, 206, 215, 250),
+                ),
                 child: const Text(
                   'Registrar',
-                  style: TextStyle(color: Color.fromARGB(255, 42, 54, 68)),
+                  style: TextStyle(color: Color.fromRGBO(26, 46, 79, 1)),
                 ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: const BottomAppBar(
+        color: Color.fromRGBO(26, 46, 79, 1),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 4.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.person,
+                      color: Color.fromARGB(255, 206, 215, 250), size: 16),
+                  SizedBox(width: 8.0),
+                  Text(
+                    'Deisy Correa',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 206, 215, 250),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.phone,
+                      color: Color.fromARGB(255, 206, 215, 250), size: 16),
+                  SizedBox(width: 8.0),
+                  Text(
+                    '3222500587',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 206, 215, 250),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

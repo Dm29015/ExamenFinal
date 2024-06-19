@@ -114,13 +114,13 @@ class _PeajeState extends State<PeajePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 42, 54, 68),
+      backgroundColor: const Color.fromRGBO(26, 46, 79, 1),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 42, 54, 68),
+        backgroundColor: const Color.fromRGBO(26, 46, 79, 1),
         title: const Text(
-          'Registro de peajes',
+          'Peajes',
           style: TextStyle(
-            color: Color.fromRGBO(255, 213, 79, 1),
+            color: Color.fromARGB(255, 206, 215, 250),
           ),
         ),
       ),
@@ -170,7 +170,7 @@ class _PeajeState extends State<PeajePage> {
             _refreshRegistrosPeajes();
           }
         },
-        backgroundColor: Colors.yellow,
+        backgroundColor:const Color.fromARGB(255, 206, 215, 250),
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
