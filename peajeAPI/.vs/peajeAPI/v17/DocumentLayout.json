@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\deisy\\OneDrive\\Escritorio\\ExamenFinal\\peajeAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A4C27097-030F-437C-9739-527A528300E4}|peajeAPI.csproj|c:\\users\\deisy\\onedrive\\escritorio\\examenfinal\\peajeapi\\models\\peaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A4C27097-030F-437C-9739-527A528300E4}|peajeAPI.csproj|solutionrelative:models\\peaje.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A4C27097-030F-437C-9739-527A528300E4}|peajeAPI.csproj|c:\\users\\deisy\\onedrive\\escritorio\\examenfinal\\peajeapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A4C27097-030F-437C-9739-527A528300E4}|peajeAPI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A4C27097-030F-437C-9739-527A528300E4}|peajeAPI.csproj|c:\\users\\deisy\\onedrive\\escritorio\\examenfinal\\peajeapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A4C27097-030F-437C-9739-527A528300E4}|peajeAPI.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,19 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\deisy\\OneDrive\\Escritorio\\ExamenFinal\\peajeAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\deisy\\OneDrive\\Escritorio\\ExamenFinal\\peajeAPI\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-19T21:00:37.42Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Peaje.cs",
-              "DocumentMoniker": "C:\\Users\\deisy\\OneDrive\\Escritorio\\ExamenFinal\\peajeAPI\\Models\\Peaje.cs",
-              "RelativeDocumentMoniker": "Models\\Peaje.cs",
-              "ToolTip": "C:\\Users\\deisy\\OneDrive\\Escritorio\\ExamenFinal\\peajeAPI\\Models\\Peaje.cs",
-              "RelativeToolTip": "Models\\Peaje.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAswBgAAAA8AAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\deisy\\OneDrive\\Escritorio\\ExamenFinal\\peajeAPI\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\deisy\\OneDrive\\Escritorio\\ExamenFinal\\peajeAPI\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAswBIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T17:59:20.419Z",
+              "WhenOpened": "2024-06-19T18:57:39.745Z",
               "EditorCaption": ""
             }
           ]

@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import '../Models/peajeModel.dart';
 
-const String api = "http://localhost:5146/api/peaje";
+const String api = "http://deidara77-001-site1.gtempurl.com/api/peaje";
 const String apiExterna = "https://www.datos.gov.co/resource/7gj8-j6i3.json";
 
 // GET: Listar Peajees

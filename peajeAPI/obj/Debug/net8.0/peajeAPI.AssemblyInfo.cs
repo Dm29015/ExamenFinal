@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("peajeAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a4d1c483cec5489e4aac1ee20a2d14b48f1d18db")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e59c1709ed62f711cbb906e0bb1f6f0716e6368e")]
 [assembly: System.Reflection.AssemblyProductAttribute("peajeAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("peajeAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

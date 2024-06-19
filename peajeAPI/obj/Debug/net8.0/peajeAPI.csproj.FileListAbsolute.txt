@@ -103,3 +103,11 @@ C:\Users\deisy\OneDrive\Escritorio\ExamenFinal\peajeAPI\obj\Debug\net8.0\refint\
 C:\Users\deisy\OneDrive\Escritorio\ExamenFinal\peajeAPI\obj\Debug\net8.0\peajeAPI.pdb
 C:\Users\deisy\OneDrive\Escritorio\ExamenFinal\peajeAPI\obj\Debug\net8.0\peajeAPI.genruntimeconfig.cache
 C:\Users\deisy\OneDrive\Escritorio\ExamenFinal\peajeAPI\obj\Debug\net8.0\ref\peajeAPI.dll
+C:\Users\deisy\OneDrive\Escritorio\ExamenFinal\peajeAPI\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\deisy\OneDrive\Escritorio\ExamenFinal\peajeAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\deisy\OneDrive\Escritorio\ExamenFinal\peajeAPI\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\deisy\OneDrive\Escritorio\ExamenFinal\peajeAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\deisy\OneDrive\Escritorio\ExamenFinal\peajeAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\deisy\OneDrive\Escritorio\ExamenFinal\peajeAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\deisy\OneDrive\Escritorio\ExamenFinal\peajeAPI\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\deisy\OneDrive\Escritorio\ExamenFinal\peajeAPI\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
