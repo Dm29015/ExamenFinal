@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import '../Models/peajeModel.dart';
 
-const String api = "http://deidara77-001-site1.gtempurl.com/api/peaje";
+const String api = "http://localhost:5146/api/peaje";
 const String apiExterna = "https://www.datos.gov.co/resource/7gj8-j6i3.json";
 
 // GET: Listar Peajees
@@ -49,8 +49,9 @@ Future<void> actualizarPeaje(int id, Map peaje) async {
       },
       body: jsonEncode(peaje),
     );
-    if (response.statusCode != 200 && response.statusCode != 201) {
-      throw Exception('Error en la solicitud HTTP: ${response.statusCode}');
+    if (response.statusCode != 200 && response.statusCode != 204) {
+      (response.statusCode);
+      throw Exception('Error en la solicitud HTTP: $Error');
     }
   } catch (e) {
     throw Exception('Error en la carga de la API: $e');
@@ -100,11 +101,14 @@ Future<String> fetchValorPeaje(
 }
 
 // DELETE: Eliminar registro de peaje
-Future<void> eliminarPeaje(int peajeId) async {
-  final url = Uri.parse('$api/$peajeId'); // Usar la constante api
+Future<void> eliminarPeaje(int id) async {
   try {
-    final response = await http.delete(url);
-    if (response.statusCode != 200 && response.statusCode != 201) {
+    final response =
+        await http.delete(Uri.parse('$api/$id'), headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    });
+
+    if (response.statusCode != 201 && response.statusCode != 204) {
       throw Exception('Error al eliminar peaje: ${response.statusCode}');
     }
   } catch (e) {

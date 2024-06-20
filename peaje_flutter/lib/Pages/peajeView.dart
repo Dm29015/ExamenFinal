@@ -3,6 +3,7 @@ import 'package:peaje_flutter/Controller/peajeController.dart';
 import 'package:peaje_flutter/Models/peajeModel.dart';
 import 'package:peaje_flutter/Pages/peajeCreate.dart';
 import '../Widgets/cardListarPeaje.dart';
+import '../Widgets/infoPeaje.dart';
 import 'peajeEdit.dart';
 
 class PeajePage extends StatefulWidget {
@@ -27,46 +28,14 @@ class _PeajeState extends State<PeajePage> {
     });
   }
 
-  void showPeajeDetailModal(Peaje peaje) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(peaje.nombrePeaje),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text("Placa: ${peaje.placa}"),
-              Text("Categoría: ${peaje.idCategoriaTarifa}"),
-              Text("Fecha: ${peaje.fechaRegistro}"),
-               Text("Valor: ${peaje.valor.toStringAsFixed(2)}"),
-            ],
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text("Cerrar"),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
+  void editar(Peaje peaje) async {
+    final route =
+        MaterialPageRoute(builder: (context) => EditarPeaje(peaje: peaje));
+    await Navigator.push(context, route);
+    _refreshRegistrosPeajes();
   }
 
-  void editar(Peaje peaje) async {
-    final result = await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => EditarPeaje(peaje: peaje)),
-    );
-    if (result == true) {
-      _refreshRegistrosPeajes();
-    }
-  }
-  
-   void eliminar(Peaje peaje) {
+  void eliminar(Peaje peaje) async {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -83,7 +52,6 @@ class _PeajeState extends State<PeajePage> {
             TextButton(
               child: const Text("Eliminar"),
               onPressed: () async {
-                Navigator.of(context).pop();
                 try {
                   await eliminarPeaje(peaje.id);
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -93,7 +61,8 @@ class _PeajeState extends State<PeajePage> {
                       backgroundColor: Colors.green,
                     ),
                   );
-                  _refreshRegistrosPeajes();
+                  Navigator.of(context).pop();
+                  _refreshRegistrosPeajes(); // Aquí vuelves a cargar la lista después de eliminar
                 } catch (e) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
@@ -102,8 +71,42 @@ class _PeajeState extends State<PeajePage> {
                       backgroundColor: Colors.red,
                     ),
                   );
+                  Navigator.of(context).pop();
                 }
               },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void showPeajeDetailModal(Peaje peaje) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Center(child: Text(peaje.placa, style: const TextStyle(color: Colors.white))),
+          backgroundColor: const Color.fromRGBO(26, 46, 79, 1),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: [
+                InfoRow(campo: 'PEAJE', valor: peaje.nombrePeaje),
+                InfoRow(campo: 'TIPO TARIFA', valor: peaje.idCategoriaTarifa),
+                InfoRow(campo: 'FECHA', valor: peaje.fechaRegistro),
+                InfoRow(campo: 'VALOR', valor: peaje.valor.toString())
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: TextButton(
+                child: const Text("Cerrar", style: TextStyle(color: Colors.white)),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
           ],
         );
@@ -117,6 +120,8 @@ class _PeajeState extends State<PeajePage> {
       backgroundColor: const Color.fromRGBO(26, 46, 79, 1),
       appBar: AppBar(
         backgroundColor: const Color.fromRGBO(26, 46, 79, 1),
+        iconTheme:
+            const IconThemeData(color: Color.fromARGB(255, 206, 215, 250)),
         title: const Text(
           'Peajes',
           style: TextStyle(
@@ -145,15 +150,17 @@ class _PeajeState extends State<PeajePage> {
                   child: Container(
                     padding: const EdgeInsets.all(10.0),
                     child: CardWidget(
-                      colorIcon: const Color.fromARGB(255, 252, 232, 54),
+                      colorIcon: const Color.fromARGB(255, 206, 215, 250),
                       placa: peaje.placa,
                       peaje: peaje.nombrePeaje,
-                       onEditPressed: () {
+                      onEditPressed: () {
                         editar(peaje);
+                        _refreshRegistrosPeajes();
                       },
                       onDeletePressed: () {
                         eliminar(peaje);
-                      }
+                        _refreshRegistrosPeajes();
+                      },
                     ),
                   ),
                 );
@@ -164,18 +171,15 @@ class _PeajeState extends State<PeajePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final route = MaterialPageRoute(builder: (context) => const RegistrarPeaje());
-          bool result = await Navigator.push(context, route);
-          if (result == true) {
-            _refreshRegistrosPeajes();
-          }
+          final route =
+              MaterialPageRoute(builder: (context) => const RegistrarPeaje());
+          await Navigator.push(context, route);
+          _refreshRegistrosPeajes();
         },
-        backgroundColor:const Color.fromARGB(255, 206, 215, 250),
+        backgroundColor: const Color.fromARGB(255, 206, 215, 250),
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
-
   }
 }
-

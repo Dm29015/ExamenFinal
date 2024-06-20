@@ -50,7 +50,7 @@ class CardWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                icon: const Icon(Icons.edit, color: Colors.yellowAccent),
+                icon: const Icon(Icons.edit, color: Color.fromARGB(255, 206, 215, 250)),
                 onPressed: onEditPressed,
               ),
               IconButton(
