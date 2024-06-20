@@ -8,7 +8,7 @@ async function fetchPeajes() {
             throw new Error('Error en la respuesta de la API');
         }
         const data = await response.json();
-        mostrarRegistrosPeajes(data); // Llamar función para mostrar los registros
+        mostrarRegistrosPeajes(data);
     } catch (error) {
         console.error('Error al obtener los peajes:', error);
     }
