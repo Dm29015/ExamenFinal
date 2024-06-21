@@ -82,37 +82,52 @@ class _PeajeState extends State<PeajePage> {
   }
 
   void showPeajeDetailModal(Peaje peaje) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Center(child: Text(peaje.placa, style: const TextStyle(color: Colors.white))),
-          backgroundColor: const Color.fromRGBO(26, 46, 79, 1),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: [
-                InfoRow(campo: 'PEAJE', valor: peaje.nombrePeaje),
-                InfoRow(campo: 'TIPO TARIFA', valor: peaje.idCategoriaTarifa),
-                InfoRow(campo: 'FECHA', valor: peaje.fechaRegistro),
-                InfoRow(campo: 'VALOR', valor: peaje.valor.toString())
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: TextButton(
-                child: const Text("Cerrar", style: TextStyle(color: Colors.white)),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return FutureBuilder<double>(
+        future: fetchDolarValue(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData) {
+            return const Center(child: Text('Registros no encontrados'));
+          } else {
+            double valorDolar = snapshot.data!;
+            return AlertDialog(
+              title: Center(child: Text(peaje.placa, style: const TextStyle(color: Colors.white))),
+              backgroundColor: const Color.fromRGBO(26, 46, 79, 1),
+              content: SingleChildScrollView(
+                child: ListBody(
+                  children: [
+                    InfoRow(campo: 'PEAJE', valor: peaje.nombrePeaje),
+                    InfoRow(campo: 'TIPO TARIFA', valor: peaje.idCategoriaTarifa),
+                    InfoRow(campo: 'FECHA', valor: peaje.fechaRegistro),
+                    InfoRow(campo: 'VALOR COP', valor: peaje.valor.toString()),
+                    InfoRow(campo: 'VALOR USD', valor: (peaje.valor / valorDolar).toStringAsFixed(2)),
+                  ],
+                ),
               ),
-            ),
-          ],
-        );
-      },
-    );
-  }
+              actions: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: TextButton(
+                    child: const Text("Cerrar", style: TextStyle(color: Colors.white)),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ),
+              ],
+            );
+          }
+        },
+      );
+    },
+  );
+}
 
   @override
   Widget build(BuildContext context) {
@@ -183,3 +198,9 @@ class _PeajeState extends State<PeajePage> {
     );
   }
 }
+
+
+
+
+
+

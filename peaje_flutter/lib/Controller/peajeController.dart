@@ -5,6 +5,7 @@ import '../Models/peajeModel.dart';
 
 const String api = "http://localhost:5146/api/peaje";
 const String apiExterna = "https://www.datos.gov.co/resource/7gj8-j6i3.json";
+const String apiDolar = "https://www.datos.gov.co/resource/mcec-87by.json";
 
 // GET: Listar Peajees
 Future<List<Peaje>> fetchRegistrosPeajes() async {
@@ -113,5 +114,23 @@ Future<void> eliminarPeaje(int id) async {
     }
   } catch (e) {
     throw Exception('Error al eliminar peaje: $e');
+  }
+}
+
+// GET Obtener valor del dólar actual 
+Future<double> fetchDolarValue() async {
+  final response = await http.get(Uri.parse(apiDolar));
+
+  if (response.statusCode == 200) {
+    List<dynamic> data = jsonDecode(response.body);
+
+    if (data.isNotEmpty) {
+      var valorDolar = double.parse(data[0]['valor']);
+      return valorDolar;
+    } else {
+      throw Exception('No hay datos disponibles.');
+    }
+  } else {
+    throw Exception('Error al cargar los datos');
   }
 }

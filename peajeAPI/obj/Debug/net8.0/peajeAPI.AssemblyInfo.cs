@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("peajeAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+00e370926d6eebf9f7c32df675ecba9e47711f1d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+474b56c8810ac053cb8c7fab747d8670d32f74a3")]
 [assembly: System.Reflection.AssemblyProductAttribute("peajeAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("peajeAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
