@@ -25,8 +25,11 @@ namespace peajeAPI.Models
         public required DateTime FechaRegistro { get; set; }
 
         [Required(ErrorMessage = "El valor es obligatorio.")]
-        [RegularExpression(@"^[0-9]+$", ErrorMessage = "El valor solo debe contener números.")]
         [Range(0, double.MaxValue, ErrorMessage = "El valor debe ser mayor o igual a 0.")]
         public required decimal Valor { get; set; }
+     
+        [Range(0, double.MaxValue, ErrorMessage = "El valor debe ser mayor o igual a 0.")]
+        public string? ValorDolar { get; set; }
+        
     }
 }

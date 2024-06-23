@@ -45,6 +45,9 @@ namespace peajeAPI.Migrations
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<string>("ValorDolar")
+                        .HasColumnType("longtext");
+
                     b.HasKey("Id");
 
                     b.ToTable("Peaje");

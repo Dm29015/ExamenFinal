@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace peajeAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class migracion : Migration
+    public partial class API : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,7 +28,9 @@ namespace peajeAPI.Migrations
                     IdCategoriaTarifa = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     FechaRegistro = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Valor = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
+                    Valor = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    ValorDolar = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {

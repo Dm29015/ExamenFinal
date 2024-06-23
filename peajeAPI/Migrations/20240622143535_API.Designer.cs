@@ -11,7 +11,7 @@ using peajeAPI.Data;
 namespace peajeAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240619182647_API")]
+    [Migration("20240622143535_API")]
     partial class API
     {
         /// <inheritdoc />
@@ -47,6 +47,9 @@ namespace peajeAPI.Migrations
 
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(65,30)");
+
+                    b.Property<string>("ValorDolar")
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 

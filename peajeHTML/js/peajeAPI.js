@@ -1,5 +1,8 @@
 const API_URL = 'http://localhost:5146/api/peaje';
 const API_PUBLICA = 'https://www.datos.gov.co/resource/7gj8-j6i3.json';
+const API_DOLAR = 'https://www.datos.gov.co/resource/mcec-87by.json';
+
+let valorDolar = 0;
 
 async function fetchPeajes() {
     try {
@@ -71,6 +74,23 @@ function cargarOpcionesCategoriaTarifa() {
     });
 }
 
+async function cargarValorDolar() {
+    try {
+        const response = await fetch(API_DOLAR);
+        if (!response.ok) {
+            throw new Error('Error en la respuesta de la API del dólar.');
+        }
+        const data = await response.json();
+        if (data.length > 0) {
+            valorDolar = parseFloat(data[0].valor); 
+        } else {
+            throw new Error('No se pudo obtener el valor del dólar.');
+        }
+    } catch (error) {
+        console.error('Error al cargar el valor del dólar:', error);
+    }
+}
+
 async function autocompletarValor() {
     const nombrePeaje = document.getElementById('nombrePeaje').value;
     const idCategoriaTarifa = document.getElementById('idCategoriaTarifa').value;
@@ -86,13 +106,13 @@ async function autocompletarValor() {
         }
         const valor = data[0].valor;
         document.getElementById('valor').value = valor;
+
+        const valorUSD = (valor / valorDolar).toFixed(2);
+        document.getElementById('valorUSD').value = valorUSD;
     } catch (error) {
         console.error('Error al autocompletar el valor del peaje:', error);
     }
 }
-
-document.getElementById('nombrePeajeActualizar').addEventListener('change', autocompletarValorActualizar);
-document.getElementById('idCategoriaTarifaActualizar').addEventListener('change', autocompletarValorActualizar);
 
 async function autocompletarValorActualizar() {
     const nombrePeaje = document.getElementById('nombrePeajeActualizar').value;
@@ -109,12 +129,15 @@ async function autocompletarValorActualizar() {
         }
         const valor = data[0].valor;
         document.getElementById('valorActualizar').value = valor;
+
+        // Convertir a dólares
+        const valorUSD = (valor / valorDolar).toFixed(2);
+        document.getElementById('valorUSDActualizar').value = valorUSD;
     } catch (error) {
         console.error('Error al autocompletar el valor del peaje:', error);
     }
 }
 
-// Buscar y cargar datos del peaje para editar
 async function buscarRegistroPeaje(id) {
     try {
         const response = await fetch(`${API_URL}/${id}`);
@@ -143,6 +166,9 @@ async function buscarRegistroPeaje(id) {
             }
             const valor = dataValor[0].valor;
             document.getElementById('valorActualizar').value = valor;
+
+            const valorUSD = (valor / valorDolar).toFixed(2);
+            document.getElementById('valorUSDActualizar').value = valorUSD;
         } catch (error) {
             console.error('Error al autocompletar el valor del peaje:', error);
         }
@@ -156,7 +182,6 @@ async function buscarRegistroPeaje(id) {
     }
 }
 
-
 async function agregarRegistroPeaje(event) {
     event.preventDefault(); // Evitar el envío del formulario por defecto
 
@@ -164,14 +189,16 @@ async function agregarRegistroPeaje(event) {
     const nombrePeaje = document.getElementById('nombrePeaje').value;
     const idCategoriaTarifa = document.getElementById('idCategoriaTarifa').value;
     const fechaRegistro = document.getElementById('fechaRegistro').value;
-    const valor = document.getElementById('valor').value; 
+    const valor = document.getElementById('valor').value;
+    const valorDolar = document.getElementById('valorUSD').value;
 
     const nuevoPeaje = {
         placa: placa,
         nombrePeaje: nombrePeaje,
         idCategoriaTarifa: idCategoriaTarifa,
         fechaRegistro: fechaRegistro,
-        valor: valor
+        valor: valor,
+        valorDolar : valorDolar
     };
 
     try {
@@ -209,6 +236,7 @@ async function actualizarRegistroPeaje(event) {
     const idCategoriaTarifa = document.getElementById('idCategoriaTarifaActualizar').value;
     const fechaRegistro = document.getElementById('fechaRegistroActualizar').value;
     const valor = document.getElementById('valorActualizar').value;
+    const valorDolar = document.getElementById('valorUSDActualizar').value;
 
     const actualizarPeaje = {
         id: idActualizar,
@@ -216,7 +244,8 @@ async function actualizarRegistroPeaje(event) {
         nombrePeaje: nombrePeaje,
         idCategoriaTarifa: idCategoriaTarifa,
         fechaRegistro: fechaRegistro,
-        valor: valor
+        valor: valor,
+        valorDolar : valorDolar
     };
 
     try {
@@ -270,9 +299,13 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchPeajes();
     cargarOpcionesNombrePeaje();
     cargarOpcionesCategoriaTarifa();
+    cargarValorDolar();
 
     document.getElementById('nombrePeaje').addEventListener('change', autocompletarValor);
     document.getElementById('idCategoriaTarifa').addEventListener('change', autocompletarValor);
+
+    document.getElementById('nombrePeajeActualizar').addEventListener('change', autocompletarValorActualizar);
+    document.getElementById('idCategoriaTarifaActualizar').addEventListener('change', autocompletarValorActualizar);
 });
 
 document.getElementById('formInsertar').addEventListener('submit', agregarRegistroPeaje);
